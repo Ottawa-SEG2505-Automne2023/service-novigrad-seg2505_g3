@@ -1,13 +1,13 @@
 package com.example.servicenovigrad;
 
-public class User {
+public class Account {
     public String username, password, userType;
 
-    public User(){
+    public Account(){
 
     }
 
-    public User(String username, String password, String userType) {
+    public Account(String username, String password, String userType) {
         this.username = username;
         this.password = password;
         this.userType = userType;

@@ -28,7 +28,6 @@ import com.google.firebase.database.FirebaseDatabase;
 public class Register extends AppCompatActivity {
 
     //declaring the parts of the activity
-    DatabaseReference accountsDB;
     FirebaseAuth mAuth;
     TextInputEditText editTextEmail, editTextPassword;
     Button buttonReg;
@@ -53,7 +52,6 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         //instantiation the components of the activity
-        accountsDB = FirebaseDatabase.getInstance().getReference("users");
         mAuth = FirebaseAuth.getInstance();
         editTextEmail = findViewById(R.id.email);
         editTextPassword = findViewById(R.id.password);
@@ -77,7 +75,6 @@ public class Register extends AppCompatActivity {
         buttonReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                char accountType;
                 String email, password;
                 email = String.valueOf(editTextEmail.getText());
                 password = String.valueOf(editTextPassword.getText());
@@ -96,22 +93,26 @@ public class Register extends AppCompatActivity {
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
+                                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                DatabaseReference clientRef = database.getReference("clients");
+                                DatabaseReference employeeRef = database.getReference("employees");
+                                String username = email.substring(0, email.indexOf('@'));
+
                                 if (task.isSuccessful()) {
                                     Toast.makeText(Register.this, "Account created.",
                                             Toast.LENGTH_SHORT).show();
                                    if(rbClient.isChecked()){
                                         //if client is checked, creates a client account
-                                        User user = new User(email,password, "Client" );
-                                        accountsDB.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user);
+                                        String id = clientRef.push().getKey();
+                                        User user = new User(username, password, "client");
+                                        clientRef.child(id).setValue(user);
                                     } else {
-                                       User user = new User(email, password, "Employee");
-                                       accountsDB.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user);
+                                       //if not, creates a employee account
+                                       String id = employeeRef.push().getKey();
+                                       User user = new User(username, password, "employee");
+                                       employeeRef.child(id).setValue(user);
                                    }
-                                    //if not, creates a employee account
-                                    User user = new User(email, password, "Employee");
-                                    FirebaseDatabase.getInstance().getReference("Users")
-                                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                            .setValue(user);
+
                                     Intent intent = new Intent(getApplicationContext(), Login.class);
                                     startActivity(intent);
                                     finish();

@@ -17,16 +17,20 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 public class Login extends AppCompatActivity {
+
 
     FirebaseAuth mAuth;
     TextInputEditText editTextEmail, editTextPassword;
     Button buttonLogin;
     TextView registerNow;
 
-   /*@Override
+   @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and send him to main screen if so
@@ -36,7 +40,8 @@ public class Login extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-    }*/
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,9 +92,11 @@ public class Login extends AppCompatActivity {
                                     Toast.makeText(Login.this, "Authentication successful.",
                                             Toast.LENGTH_SHORT).show();
 
-                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                    DatabaseReference clientsDB = FirebaseDatabase.getInstance().getReference();
+                                    Intent intent = new Intent(getApplicationContext(), MainActivity2.class); // employee activity
                                     startActivity(intent);
                                     finish();
+
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Toast.makeText(Login.this, "Authentication failed.",

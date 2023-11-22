@@ -12,7 +12,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity2 extends AppCompatActivity {
-    /* class defining the behavior of the Main Screen
+    /* class defining the behavior of employee screen
      */
 
     FirebaseAuth auth;
@@ -23,7 +23,7 @@ public class MainActivity2 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main2);
 
         //instantiate components of the main activity
         auth = FirebaseAuth.getInstance();
