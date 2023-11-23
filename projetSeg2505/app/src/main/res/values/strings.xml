@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">projetSeg2505</string>
+    <string name="login">Login</string>
+    <string name="email">email</string>
+    <string name="password">password</string>
+    <string name="register">Register</string>
+    <string name="employee">Employee</string>
+    <string name="client">Client</string>
+    <string name="click_to_login">Click to login</string>
+    <string name="click_to_register">Click to register</string>
+    <string name="logout">Logout</string>
+    <string name="client_interface">Client Interface</string>
+    <string name="employee_interface">Employee Interface</string>
+    <string name="username">username</string>
+    <string name="hello_user">Hello user!</string>
+    <string name="admin_interface">Admin Interface</string>
+</resources>
