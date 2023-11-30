@@ -109,11 +109,11 @@ public class ManageLocationActivity extends AppCompatActivity{
                 String closingTime = editTextClosingTime.getText().toString().trim();
 
                 // validation
-                if (!validateAddress(name)) {
+                if (!validateName(name)) {
                     Toast.makeText(ManageLocationActivity.this, "Invalid name", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (!validateName(address)) {
+                if (!validateAddress(address)) {
                     Toast.makeText(ManageLocationActivity.this, "Invalid address", Toast.LENGTH_SHORT).show();
                     return;
                 }
